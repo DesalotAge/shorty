@@ -1,0 +1,45 @@
+post endpoint
+---
+tags:
+    - Flask Restful APIs
+parameters:
+    - in: body
+      name: user
+      description: request
+      schema:
+            type: object
+            required:
+                - url
+            properties:
+                provider:
+                    type: string
+                    enum: ['tinyurl.com', 'bit.ly']
+                url:
+                    type: string
+responses:
+    200:
+        description: Number statistics
+        schema:
+            id: stats
+            properties:
+                url:
+                    type: string
+                    description: Begin url
+                link:
+                    type: string
+                    description: Compressed data according to given api
+    400:
+      description: Wrong data
+      schema:
+        id: real_mis
+        properties:
+          error:
+            type: string
+            description: Given wrong data
+          error_list:
+            type: array
+            items:
+                type: object
+            description: List of errors
+    500:
+        description: Server error. Couldn't resolve url
